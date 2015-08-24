@@ -1,0 +1,9 @@
+author: Bart Vanbrabant <bart@impera.io>
+license: Apache 2.0
+name: std
+source: git@git.impera.io:modules/std
+version: 0.1
+requires:
+    std: git@git.impera.io:modules/std, ">= 0.4"
+    mongodb: git@git.impera.io:modules/mongodb, ">= 0.1b1"
+    yum: git@git.impera.io:modules/yum, ">= 0.1"
