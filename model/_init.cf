@@ -1,12 +1,20 @@
-entity CellarApp extends ip::services::Server:
-
+entity CellarApp extends web::Application, web::ApplicationContainer:
+    """
+        Run the nodecellar app directly with npm start
+    """
 end
 
 CellarApp nodecellar [0:] -- [1] mongodb::MongoDB mongo
 
 implementation cellarApp for CellarApp:
-    yum_repo = yum::Repository(host=host, name="impera_demo", baseurl="https://impera.io/demo/repo/")
-    pkg = std::Package(host=host, name="nodecellar", state="installed", requires=yum_repo)
+    self.container = self
+    self.user = "nobody"
+    self.group = "nobody"
+    self.document_root = "/opt/nodecellar"
+
+    yum_repo = yum::Repository(host=host, name="impera_demo", metadata_expire=10,
+                               baseurl="https://ci.iminds-security.be/repos/yum/nodecellar/")
+    pkg = std::Package(host=host, name="nodecellar", state="latest", requires=yum_repo)
     unit_file = std::ConfigFile(host=host, path="/etc/systemd/system/nodecellar.service", reload=true,
                                 content=std::template("nodecellar/unitfile.tmpl"))
 
