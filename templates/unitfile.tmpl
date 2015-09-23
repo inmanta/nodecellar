@@ -9,7 +9,7 @@ User=nobody
 Group=nobody
 Environment=MONGO_HOST={{ mongo.host.ip }}
 WorkingDirectory=/opt/nodecellar
-ExecStart=/usr/bin/npm start
+ExecStart=/usr/bin/node serverwithstatsd.js
 Restart=always
 StandardOutput=journal
 StandardError=journal
