@@ -4,7 +4,8 @@ entity CellarApp extends web::Application, web::ApplicationContainer:
     """
 end
 
-CellarApp nodecellar [0:] -- [1] mongodb::MongoDB mongo
+CellarApp nodecellar [0:] -- [0:1] mongodb::MongoDB mongo
+CellarApp nodecellar [0:] -- [0:1] mongodb::ReplicaSet rplset
 
 implementation cellarApp for CellarApp:
     self.container = self
