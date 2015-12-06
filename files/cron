@@ -1,0 +1,3 @@
+SHELL=/bin/bash
+
+* * * * * root curl -o /dev/null -s -f http://localhost:3000/wines || systemctl restart nodecellar

@@ -19,6 +19,9 @@ implementation cellarApp for CellarApp:
     unit_file = std::ConfigFile(host=host, path="/etc/systemd/system/nodecellar.service", reload=true,
                                 content=std::template("nodecellar/unitfile.tmpl"))
 
+    cron_job = std::ConfigFile(host=host, path="/etc/cron.d/nodecellar",
+                               content=std::file("nodecellar/cron"))
+
     std::Service(host=host, name="nodecellar", state="running", onboot=true,
                  requires=[unit_file, pkg])
 end
