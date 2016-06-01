@@ -1,8 +1,9 @@
 author: Inmanta <code@inmanta.com>
 license: Apache 2.0
 name: nodecellar
-version: '0.3'
+version: '0.4'
 requires:
 - std
 - mongodb
 - yum
+- web

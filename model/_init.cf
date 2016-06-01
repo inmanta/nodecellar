@@ -17,6 +17,7 @@
 """
 import mongodb
 import yum
+import web
 
 entity CellarApp extends web::Application, web::ApplicationContainer:
     """
