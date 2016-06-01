@@ -2,6 +2,8 @@ entity CellarApp extends web::Application, web::ApplicationContainer:
     """
         Run the nodecellar app directly with npm start
     """
+import mongodb
+import yum
 end
 
 CellarApp nodecellar [0:] -- [0:1] mongodb::MongoDB mongo

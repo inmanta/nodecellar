@@ -1,9 +1,8 @@
-author: Bart Vanbrabant <bart@impera.io>
+author: Inmanta <code@inmanta.com>
 license: Apache 2.0
 name: nodecellar
-source: git@git.impera.io:modules/nodecellar
-version: 0.1
+version: '0.2'
 requires:
-    std: git@git.impera.io:modules/std, ">= 0.4"
-    mongodb: git@git.impera.io:modules/mongodb, ">= 0.1b1"
-    yum: git@git.impera.io:modules/yum, ">= 0.1"
+- std
+- mongodb
+- yum
