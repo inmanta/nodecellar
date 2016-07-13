@@ -7,7 +7,7 @@ After=network.target
 Type=simple
 User=nobody
 Group=nobody
-Environment=MONGO_HOST={{ mongo.host.ip }}
+EnvironmentFile=/etc/nodecellar
 WorkingDirectory=/opt/nodecellar
 ExecStart=/usr/bin/npm start
 Restart=always

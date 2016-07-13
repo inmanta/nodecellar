@@ -38,13 +38,16 @@ implementation cellarApp for CellarApp:
                                baseurl="https://ci.iminds-security.be/repos/yum/nodecellar/")
     pkg = std::Package(host=host, name="nodecellar", state="latest", requires=yum_repo)
     unit_file = std::ConfigFile(host=host, path="/etc/systemd/system/nodecellar.service", reload=true,
-                                content=std::template("nodecellar/unitfile.tmpl"))
+                                content=std::file("nodecellar/nodecellar.service"))
+    cfg_file = std::ConfigFile(host=host, path="/etc/nodecellar", reload=true,
+                                content=std::template("nodecellar/nodecellar.tmpl"))
+
 
     cron_job = std::ConfigFile(host=host, path="/etc/cron.d/nodecellar",
-                               content=std::file("nodecellar/cron"))
+                               content=std::file("nodecellar/cron"), requires=service)
 
-    std::Service(host=host, name="nodecellar", state="running", onboot=true,
-                 requires=[unit_file, pkg])
+    service = std::Service(host=host, name="nodecellar", state="running", onboot=true,
+                 requires=[unit_file, pkg, cfg_file])
 end
 
 implement CellarApp using cellarApp
