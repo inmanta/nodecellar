@@ -16,7 +16,6 @@
     Contact: code@inmanta.com
 """
 import mongodb
-import yum
 import web
 
 entity CellarApp extends web::Application, web::ApplicationContainer:
@@ -34,9 +33,7 @@ implementation cellarApp for CellarApp:
     self.group = "nobody"
     self.document_root = "/opt/nodecellar"
 
-    yum_repo = yum::Repository(host=host, name="impera_demo", metadata_expire=10,
-                               baseurl="https://ci.iminds-security.be/repos/yum/nodecellar/")
-    pkg = std::Package(host=host, name="nodecellar", state="latest", requires=yum_repo)
+    pkg = std::Package(host=host, name="nodecellar", state="latest")
     unit_file = std::ConfigFile(host=host, path="/etc/systemd/system/nodecellar.service", reload=true,
                                 content=std::file("nodecellar/nodecellar.service"))
     cfg_file = std::ConfigFile(host=host, path="/etc/nodecellar", reload=true,
